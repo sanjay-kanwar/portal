@@ -1,0 +1,30 @@
+{
+  "name": "nextjs-lerna-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lerna run dev --stream",
+    "build": "lerna run build --stream",
+    "start": "lerna run start --stream"
+  },
+  "workspaces": [
+    "packages/*",
+    "plugins/*"
+  ],
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.14",
+    "lerna": "^8.1.9",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.14"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.60.5",
+    "@tanstack/react-query-devtools": "^5.60.5"
+  }
+}
