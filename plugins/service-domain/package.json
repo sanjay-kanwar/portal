@@ -1,14 +1,12 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "@internal/service-domain",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "style": "npx tailwindcss build -i ./src/app/styles/index.css -o ./src/app/styles/globals.css --watch"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "^14.0.0",
@@ -16,12 +14,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "eslint-config-next": "15.0.3",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "eslint": "^8.0.0",
     "postcss": "^8",
-    "eslint-config-next": "^14.0.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.0.0"
   }
