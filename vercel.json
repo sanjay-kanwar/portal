@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "apps/Dockerfile",
+        "src": "app/Dockerfile",
         "use": "@vercel/docker"
       }
     ],

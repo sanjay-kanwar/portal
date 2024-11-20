@@ -1,4 +1,5 @@
 **/node_modules
+**/.next
 # Dependencies
 node_modules
 /.pnp
