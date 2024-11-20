@@ -16,21 +16,16 @@ const createQueryClient = new QueryClient();
 export default function Home() {
   const [queryClient] = useState(createQueryClient);
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex">
+    <div className="flex h-screen bg-gray-100">
+      <div className="flex w-full">
         <Sidebar />
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col">
           <NavBar />
-          <main className="p-8">
-            <h1 className="text-2xl font-semibold text-gray-900 mb-6">
-              Dashboard
-            </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <QueryClientProvider client={queryClient}>
-                <PluginA />
-                <ReactQueryDevtools initialIsOpen={false} />
-              </QueryClientProvider>
-            </div>
+          <main className="flex-1 overflow-y-auto">
+            <QueryClientProvider client={queryClient}>
+              <PluginA />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
           </main>
         </div>
       </div>
