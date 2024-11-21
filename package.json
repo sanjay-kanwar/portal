@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "lerna run dev --stream --scope=app",
-    "build": "lerna run build --stream",
+    "build": "lerna run build --stream --scope=app",
     "start": "lerna run start --stream --scope=app",
     "style": "lerna run style --stream --scope=app"
   },
