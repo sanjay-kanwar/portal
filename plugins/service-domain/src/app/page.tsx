@@ -1,8 +1,27 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+'use client';
+
+import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
-const fetchItems = async ({ pageParam = 0 }) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
+type ServiceDomain = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+type Page = {
+  nextPage: number;
+  hasMore: boolean;
+  domains: ServiceDomain[]; 
+};
+type Error = {
+  message: string; // Description of the error
+  statusCode: number; // HTTP status code
+};
+
+const fetchItems = async (context :QueryFunctionContext): Promise<Page> => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const pageParam = context.pageParam as number || 0;
   const newItems = Array.from({ length: 10 }, (_, i) => ({
     id: pageParam * 10 + i + 1,
     title: `Item ${pageParam * 10 + i + 1}`,
@@ -19,11 +38,12 @@ export default function ServiceDomain() {
     isFetchingNextPage,
     isLoading,
     isError,
-  } = useInfiniteQuery({
+  } = useInfiniteQuery<Page>({
     queryKey: ["items"],
     queryFn: fetchItems,
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.nextPage : undefined,
+    initialPageParam: 0,
   });
 
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -59,7 +79,7 @@ export default function ServiceDomain() {
         <div className="text-center text-error">Error fetching data</div>
       ) : (
         <div className="w-full grid gap-2 lg:grid-cols-4 grid-cols-2 sm:grid-cols-1">
-          {data?.pages.map((page, i) => {
+          {data?.pages?.map((page, i) => {
             return page.domains?.map((domain) => (
               <div key={domain.id} className="card bg-base-100 ">
                 <div className="card-body">
@@ -82,7 +102,7 @@ export default function ServiceDomain() {
           <div className="h-6 w-6 animate-spin text-blue-500">Loading</div>
         )}
       </div>
-      {!hasNextPage && data?.pages.length > 0 && (
+      {!hasNextPage && data && data.pages?.length > 0 && (
         <p className="text-center mt-4 text-gray-500">No more items to load</p>
       )}
     </>
