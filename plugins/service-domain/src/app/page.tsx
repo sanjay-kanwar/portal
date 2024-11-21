@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
@@ -12,18 +12,22 @@ type ServiceDomain = {
 type Page = {
   nextPage: number;
   hasMore: boolean;
-  domains: ServiceDomain[]; 
+  domains: ServiceDomain[];
 };
 
-const fetchItems = async (context :QueryFunctionContext): Promise<Page> => {
+const fetchItems = async (context: QueryFunctionContext): Promise<Page> => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
-  const pageParam = context.pageParam as number || 0;
+  const pageParam = (context.pageParam as number) || 0;
   const newItems = Array.from({ length: 10 }, (_, i) => ({
     id: pageParam * 10 + i + 1,
     title: `Item ${pageParam * 10 + i + 1}`,
     description: `This is the description for item ${pageParam * 10 + i + 1}.`,
   }));
-  return { domains: newItems, nextPage: pageParam + 1, hasMore: pageParam < 10 };
+  return {
+    domains: newItems,
+    nextPage: pageParam + 1,
+    hasMore: pageParam < 10,
+  };
 };
 
 export default function ServiceDomain() {
@@ -41,7 +45,6 @@ export default function ServiceDomain() {
       lastPage.hasMore ? lastPage.nextPage : undefined,
     initialPageParam: 0,
   });
-
   const observerTarget = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,7 +72,7 @@ export default function ServiceDomain() {
     <>
       {isLoading ? (
         <div className="flex justify-center items-center h-full">
-          Loading...
+          <span className="loading loading-dots loading-lg"></span>
         </div>
       ) : isError ? (
         <div className="text-center text-error">Error fetching data</div>
@@ -95,7 +98,9 @@ export default function ServiceDomain() {
         className="flex justify-center items-center h-16 mt-4"
       >
         {isFetchingNextPage && (
-          <div className="h-6 w-6 animate-spin text-blue-500">Loading</div>
+          <div className="flex justify-center items-center h-full">
+            <span className="loading loading-dots loading-lg"></span>
+          </div>
         )}
       </div>
       {!hasNextPage && data && data.pages?.length > 0 && (
