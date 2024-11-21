@@ -14,10 +14,6 @@ type Page = {
   hasMore: boolean;
   domains: ServiceDomain[]; 
 };
-type Error = {
-  message: string; // Description of the error
-  statusCode: number; // HTTP status code
-};
 
 const fetchItems = async (context :QueryFunctionContext): Promise<Page> => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
