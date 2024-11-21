@@ -75,7 +75,7 @@ export default function ServiceDomain() {
         <div className="text-center text-error">Error fetching data</div>
       ) : (
         <div className="w-full grid gap-2 lg:grid-cols-4 grid-cols-2 sm:grid-cols-1">
-          {data?.pages?.map((page, i) => {
+          {data?.pages?.map((page) => {
             return page.domains?.map((domain) => (
               <div key={domain.id} className="card bg-base-100 ">
                 <div className="card-body">
