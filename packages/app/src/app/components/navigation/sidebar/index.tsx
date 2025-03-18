@@ -24,6 +24,39 @@ const Sidebar = (): JSX.Element => {
         sidebarOpen ? "w-64" : "w-20"
       }`}
     >
+
+
+      
+      {/* Selected Filters Pills */}
+      {selectedFilters.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mt-3">
+          {selectedFilters.map((filter) => (
+            <div
+              key={filter.id}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-transparent border border-gray-300 rounded-full text-sm hover:border-gray-400 transition-colors group"
+            >
+              <span className="capitalize text-gray-700">{filter.category}: <span className="font-medium">{filter.value}</span></span>
+              <button
+                onClick={() => removeFilter(filter.id)}
+                className="hover:bg-gray-100 rounded-full p-1 transition-colors -mr-1"
+                title="Remove filter"
+              >
+                <X size={14} className="text-neutral-500 group-hover:text-neutral-700" />
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={clearAllFilters}
+            className="text-sm text-gray-500 hover:text-gray-700 transition-colors ml-2"
+          >
+            Clear all
+          </button>
+        </div>
+      )}
+
+
+
+      
       <div className="flex items-center p-4">
         {sidebarOpen && (
           <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
